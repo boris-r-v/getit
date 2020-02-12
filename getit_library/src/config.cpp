@@ -1,21 +1,25 @@
 #include <config.h>
 #include <iostream>
 
-getit::Manager::Manager( std::string const& _p, std::string const& _m ) : 
+getit::Manager::Manager( std::string const& _p, std::string const& _m, std::string const& _fn ) : 
     producer_( _p ),
-    merch_( _m )
+    merch_( _m ),
+    file_name_ ( _fn )
 {
 }
 
-std::string const& getit::Manager::producer()
+std::string const& getit::Manager::producer() const
 {
     return producer_;
 }
-std::string const& getit::Manager::merch()
+std::string const& getit::Manager::merch() const
 {
     return merch_;
 }
-
+std::string const& getit::Manager::file_name() const
+{
+    return file_name_;
+}
 
 getit::Config::Config( std::string const& path_to_config  ) 
 {
@@ -53,7 +57,8 @@ void getit::Config::extract_managers( xmlpp::DomParser const& vm  )
 	    Manager	
 	    (
 		static_cast<xmlpp::Element*>(m)->get_attribute_value("producer"),
-		static_cast<xmlpp::Element*>(m)->get_attribute_value("merch")
+		static_cast<xmlpp::Element*>(m)->get_attribute_value("merch"),
+		static_cast<xmlpp::Element*>(m)->get_attribute_value("filename")
 	    )
 	);
     }

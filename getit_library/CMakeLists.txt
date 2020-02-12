@@ -1,4 +1,4 @@
-find_package(Boost COMPONENTS program_options system REQUIRED )
+find_package(Boost COMPONENTS program_options system filesystem regex REQUIRED )
 find_package(PkgConfig REQUIRED)
 pkg_check_modules(LIBXML++ REQUIRED libxml++-2.6)
 

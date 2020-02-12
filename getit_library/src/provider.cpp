@@ -1,10 +1,19 @@
 #include <provider.h>
+#include <file.h>
+
 static unsigned CHECK_PERIOD (3);
 
 getit::Provider::Provider( getit::Config const& vm, boost::asio::io_service& io ):
     timer_ ( io )
 {
 //    std::cout << "getif::Provider ctor: " << vm["indir"].as<std::string>() << " " << vm["outdir"].as<std::string>() << " " << vm["config"].as<std::string>() << std::endl;
+    //Создать и настроить модули:
+//	1. проходить по customers -- пистаь в базу данных новые заказы
+//		Если есть новые заказы уведомляем об этом менеджеров Observer
+//	2. проходить по менеджерам и если есть новые заказы - обновлять данные в их фалах
+    getit::Directory d;
+    std::cout << d.getfiles( "./", "^.*\\.(csv|txt|cvs)$" ).size() << std::endl;
+
 }
 
 void getit::Provider::run( )

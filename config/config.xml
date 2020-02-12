@@ -1,16 +1,13 @@
 <?xml version='1.0'?>
 <root>
     <!-- Указание путей к файлам -->
-    <path customers="./customers" managers="./managers" />
+    <path customers="./customers/" managers="./managers" />
 
     <!-- Описание того, что хотят менеджеры -->
     <managers >
-	<manager producer="Бабушкины_фрукты" merch="" />
-	<manager producer="Дедушкины_овощи" merch="" />
-	<manager producer="" merch="Яблоки" />
+	<manager filename="first.csv" producer="Бабушкины_фрукты" merch="" />
+	<manager filename="second.csv" producer="Дедушкины_овощи" merch="" />
+	<manager filename="third.csv" producer="" merch="Яблоки" />
     </managers>
-
-</main>
-
 
 </root>

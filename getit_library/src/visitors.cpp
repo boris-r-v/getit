@@ -15,7 +15,8 @@ void getit::OrderForProducer::visit( DatabaseIface&  _d )
 	    return ( producer_ == _f->producer() ? true : false );
 	}
     );
-    //FIX ME - needed to save data
+    //FIX ME - needed accumulate and save data
+
 }
 
 
@@ -33,5 +34,5 @@ void getit::OrderForName::visit( DatabaseIface&  _d )
 	    return ( name_ == _f->name() ? true : false );
 	}
     );
-    //FIX ME - needed to save data
+    //FIX ME - needed accumulate and save data
 }

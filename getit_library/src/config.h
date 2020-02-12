@@ -11,11 +11,12 @@ namespace getit
 {
     class Manager
     {
-	    std::string producer_, merch_;
+	    std::string producer_, merch_, file_name_;
 	public:
-	    Manager( std::string const& _p, std::string const& _m ); 
-	    std::string const& producer();
-	    std::string const& merch();
+	    Manager( std::string const& _p, std::string const& _m, std::string const& _fn );
+	    std::string const& producer() const;
+	    std::string const& merch() const;
+	    std::string const& file_name() const;
     };
     typedef std::list<Manager> managers_t;
 
