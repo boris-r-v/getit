@@ -1,0 +1,16 @@
+<?xml version='1.0'?>
+<root>
+    <!-- Указание путей к файлам -->
+    <path customers="./customers" managers="./managers" />
+
+    <!-- Описание того, что хотят менеджеры -->
+    <managers >
+	<manager producer="Бабушкины_фрукты" merch="" />
+	<manager producer="Дедушкины_овощи" merch="" />
+	<manager producer="" merch="Яблоки" />
+    </managers>
+
+</main>
+
+
+</root>

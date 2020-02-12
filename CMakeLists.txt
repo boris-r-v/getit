@@ -6,7 +6,10 @@ message(${CMAKE_SYSTEM_PROCESSOR})
 # set compile time options 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Wall -O3 ")
 
-# add public library
+# add configuration file
+add_subdirectory(config)
+
+# add getit library
 add_subdirectory(getit_library)
 
 # add include dir for the exutables

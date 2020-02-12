@@ -1,5 +1,6 @@
 #include <main.h>
 #include <provider.h>
+#include <config.h>
 #include <boost/program_options.hpp>		
 #include <thread>
 #include <boost/asio.hpp>
@@ -12,8 +13,9 @@ void getit::Main::run(int argc, char** argv)
     boost::program_options::options_description gen_desc("General options");
     gen_desc.add_options()
     ("help,h", "Produce help message")
-    ("indir,i",po::value<std::string>() ,"Specifies a directory with csv-files from customers")
-    ("outdir,o",po::value<std::string>() , "Specifies a directory with files for managers ")
+//    ("indir,i",po::value<std::string>() ,"Specifies the directory with csv-files from customers")
+//    ("outdir,o",po::value<std::string>() , "Specifies the directory with files for managers ")
+    ("config,c",po::value<std::string>() , "Specifies the configuration file with managers descriptions")
     ;
 
     boost::program_options::options_description desc;
@@ -34,17 +36,20 @@ void getit::Main::run(int argc, char** argv)
 
     if ( vm.count("help") )
     {
-	std::cout << "  Welcome to getit - sort programm for fruit business  " << std::endl;
-	std::cout << "\tType: \"getit --indir=./customers --outdir=./managers\" - to automatic sort inconing requests from dir: ./customers, and put manager files to: ./managers" << std::endl;
-	std::cout << "  Copyright, Boris.R <borisrozhkin@gmail.com>" << std::endl << std::endl;
+	std::cout << "  Welcome to getit - sort programm for b2b business  " << std::endl;
+//	std::cout << "\tType: \"getit --indir=./customers --outdir=./managers --config=./file.conf\" - to automatic sort inconing requests from dir: ./customers, and put manager files to: ./managers" << std::endl;
+	std::cout << "  Author: Boris.R <borisrozhkin@gmail.com>" << std::endl << std::endl;
+	std::cout << "  Usage: getit --config=./file.conf"  << std::endl;
 
 	std::cout << desc << std::endl;
 	return;
     }
 
-    if ( vm.count("indir") and vm.count("outdir") )
+    //if ( vm.count("indir") and vm.count("outdir") and vm.count("config") )
+    if ( vm.count("config") )
     {
-	getit::Provider pro( vm, service_ );
+	getit::Config co ( vm["config"].as<std::string>() );
+	getit::Provider pro( co, service_ );
 	pro.run();
 	service_.run();
 	return;
