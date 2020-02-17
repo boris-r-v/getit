@@ -80,6 +80,7 @@ namespace getit
 	    virtual FileState is_modified() const = 0;
 	    virtual file_lines_t getlines() const = 0;
 	    virtual void putlines( file_lines_t const &) const = 0;
+	    virtual std::string path() const = 0;
 	
     };
     typedef std::shared_ptr< FileIface > file_iface_ptr;

@@ -6,10 +6,7 @@
 getit::File::File ( std::string const& _p ):
     path_ ( _p ),
     last_read_time_( 0 )
-
 {
-    std::cout <<"create getit::File" << path_ << std::endl;
-
 }
 
 getit::FileState getit::File::is_modified() const
@@ -48,6 +45,11 @@ void getit::File::putlines( file_lines_t const& _l ) const
 	for ( auto a : _l )
 	    s << a << std::endl;
     }
+}
+
+std::string getit::File::path() const
+{
+    return path_;
 }
 
 getit::file_list_t getit::Directory::getfiles( std::string const& path, std::string const& mask) const

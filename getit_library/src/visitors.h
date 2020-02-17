@@ -31,6 +31,16 @@ namespace getit
     };
 
 
+    /**
+    * @brief This is algo for update database
+    */
+    class DataBaseUpdate final: public VisitorIface<DatabaseIface>
+    {
+	public:
+	    virtual void visit( DatabaseIface& ) override; 	        
+    };
+
+
 
 }
 #endif // GETIT_VISITORS_H

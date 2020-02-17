@@ -1,8 +1,6 @@
 #include <manager.h>
 #include <file.h>
 #include <visitors.h>
-#include <iostream>
-
 getit::Manager::Manager( std::string const& _p, std::string const& _m, std::string const& _fn ) : 
     producer_( _p ),
     merch_( _m ),
@@ -12,7 +10,6 @@ getit::Manager::Manager( std::string const& _p, std::string const& _m, std::stri
     	visitors_.emplace_back ( std::make_shared<OrderForProducer> ( producer_, [this](file_lines_t _t){ store( std::move(_t )); } ) );
     if ( !merch_.empty() )
     	visitors_.emplace_back ( std::make_shared<OrderForName> ( merch_, [this](file_lines_t _t){ store( std::move(_t )); } ) );
-    
 }
 
 std::string const& getit::Manager::producer() const

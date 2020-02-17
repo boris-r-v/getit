@@ -19,7 +19,8 @@ void getit::Mediator::do_it()
     {
 	if ( FileState::modified == file->is_modified() )
 	{
-
+	    //FIX ME use visitor for update db
+	    std::cout << "Change in file: " << file->path() << std::endl;
 	    for ( auto fline : file->getlines() )
 	    {
 		data_base_->put( std::make_shared<Fruit>(fline) );

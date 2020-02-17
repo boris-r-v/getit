@@ -18,6 +18,7 @@ namespace getit
 	    getit::FileState is_modified() const override;
 	    file_lines_t getlines() const override;
 	    void putlines( file_lines_t const& ) const override;
+	    std::string path() const;
     };
 
     class Directory final: public DirectoryIface

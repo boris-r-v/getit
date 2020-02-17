@@ -1,6 +1,5 @@
 #include <fruit.h>
 #include <sstream>
-#include <iostream>
 
 getit::Fruit::Fruit (std::string const& file_line )
 {

@@ -7,7 +7,7 @@
     <managers >
 	<manager filename="first.csv" producer="Бабушкины_фрукты" merch="" />
 	<manager filename="second.csv" producer="Дедушкины_овощи" merch="" />
-	<manager filename="third.csv" producer="" merch="Яблоки" />
+	<manager filename="third.csv" producer="" merch="яблоки" />
     </managers>
 
 </root>
