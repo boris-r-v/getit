@@ -6,6 +6,7 @@
 #include <string>
 #include <list>
 #include <memory>
+#include <functional>
 
 namespace getit
 {
@@ -26,7 +27,20 @@ namespace getit
     };
     typedef std::shared_ptr< MerchIface > merch_iface_ptr;
     typedef std::list< merch_iface_ptr > merch_list_t;
-
+    
+    /**
+	@brief Remote Invoker
+    */
+    template< typename T >
+    class Invoker
+    {
+	protected:
+	    std::function< void ( T ) > invoke_;
+	public:
+	    Invoker ( std::function< void ( T ) > &f ): invoke_(std::move(f) )
+	    {
+	    }
+    };
     /**
 	@brief DatabaseVisitorIface
     */
@@ -46,7 +60,9 @@ namespace getit
 	    virtual merch_list_t const& get( ) const = 0;
 	    virtual void accept( VisitorIface<DatabaseIface>& ) = 0;
     };
-
+    typedef std::shared_ptr<DatabaseIface> database_iface_ptr;
+    typedef std::shared_ptr <VisitorIface<DatabaseIface> > visitor_iface_ptr;
+    typedef std::list <visitor_iface_ptr> visitor_list_t;
     /**
 	@brief Income File state
     */
@@ -77,12 +93,49 @@ namespace getit
 	public:
 	    virtual file_list_t getfiles( std::string const& path, std::string const& mask ) const = 0;
     };
+    typedef std::shared_ptr< DirectoryIface > directory_iface_ptr;
 
     /**
 	@brief LogicIface Mediator pattern with curretn handle data logic
     */
+	//FIX ME Mediator has no iface yet
+
+    /**
+	@brief Manager iface
+    */
+    class ManagerIface
+    {
+	public:
+	    virtual std::string const& producer() const = 0;
+	    virtual std::string const& merch() const = 0;
+	    virtual std::string const& file_name() const = 0;
+	    virtual void work( DatabaseIface& ) = 0;
+    };
+    typedef std::shared_ptr<ManagerIface> manager_iface_ptr;
+    typedef std::list<manager_iface_ptr> managers_list_t;
+
+    /**
+	@brief Manager iface
+    */
+    class ManagerPoolIface
+    {
+	public:
+	    virtual void work( DatabaseIface&  ) = 0;
+    };
+    typedef std::shared_ptr<ManagerPoolIface> manager_pool_iface_ptr;
+
+    /**
+	@brief Config iface
+    */
+    class ConfigIface
+    {    
+	public:
+	    virtual std::string const& customers_path() const = 0;
+	    virtual std::string const& managers_path() const = 0;
+	    virtual managers_list_t managers() const = 0;
+    };
 
 
 
-}
+}	
 #endif // GETIT_IFACE_H

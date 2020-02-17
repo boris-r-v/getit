@@ -1,5 +1,7 @@
 #include <fruit.h>
 #include <sstream>
+#include <iostream>
+
 getit::Fruit::Fruit (std::string const& file_line )
 {
     std::string price_s, weight_s;
@@ -8,9 +10,8 @@ getit::Fruit::Fruit (std::string const& file_line )
     std::getline( ss, price_s, ',' );
     std::getline( ss, producer_, ',' );
     std::getline( ss, weight_s, ',' );
-    
     price_ = atof ( price_s.c_str() );  //FIX ME need to use std::stof - but it may whrow exceptions,  this no exception, but may be incorrect
-    producer_ = atof( weight_s.c_str() ); //FIX ME need to use std::stof - but it may whrow exceptions,  this no exception, but may be incorrect
+    weight_ = atof( weight_s.c_str() ); //FIX ME need to use std::stof - but it may whrow exceptions,  this no exception, but may be incorrect
 }
 
 getit::merch_price_t getit::Fruit::price() const

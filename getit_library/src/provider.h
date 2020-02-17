@@ -5,6 +5,7 @@
 	
 */
 #include <config.h>
+#include <mediator.h>
 #include <boost/asio.hpp>
 #include <boost/program_options.hpp>		
 
@@ -13,6 +14,7 @@ namespace getit
     class Provider
     {
     	    boost::asio::deadline_timer timer_;
+	    Mediator med_;
 
 	    void do_wait();
         public:	

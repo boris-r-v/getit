@@ -1,7 +1,7 @@
 <?xml version='1.0'?>
 <root>
     <!-- Указание путей к файлам -->
-    <path customers="./customers/" managers="./managers" />
+    <path customers="./config/customers/" managers="./config/managers" />
 
     <!-- Описание того, что хотят менеджеры -->
     <managers >

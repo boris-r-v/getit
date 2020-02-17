@@ -1,26 +1,24 @@
+/** \file config.h
+    @brief Описание классов конфигурации ПО
+
+    @authors Boris Rozhkin borisrozhkin@gmail.com
+
+*/
+
 #ifndef GETIT_CONFIG_H
 #define GETIT_CONFIG_H
-/**
-    @brief Class Config - обрабатывает конфигурацию задачи
-	
-*/
-#include <list>		
+#include <iface.h>		
 #include <libxml++/libxml++.h>
 
 namespace getit
 {
-    class Manager
-    {
-	    std::string producer_, merch_, file_name_;
-	public:
-	    Manager( std::string const& _p, std::string const& _m, std::string const& _fn );
-	    std::string const& producer() const;
-	    std::string const& merch() const;
-	    std::string const& file_name() const;
-    };
-    typedef std::list<Manager> managers_t;
+    /**
+	@brief Class Config - обрабатывает конфигурацию задачи
 
-    class Config
+	Парсит конфигурауционный файл с описанием решаемой задачи    
+		
+    */
+    class Config final : public ConfigIface 
     {
 	    void extract_customers_path( xmlpp::DomParser const& );
 	    void extract_managers_path( xmlpp::DomParser const& );
@@ -28,15 +26,15 @@ namespace getit
     
 	    std::string customers_path_;
 	    std::string managers_path_;
-	    managers_t managers_;
+	    managers_list_t managers_;
 	public:
 	    Config () = delete;
 	    virtual ~Config () = default;
 	    Config ( std::string const& path_to_config );
     
-	    std::string const& customers_path() const;
-	    std::string const& managers_path() const;
-	    managers_t const& managers() const;
+	    std::string const& customers_path() const override;
+	    std::string const& managers_path() const override;
+	    managers_list_t managers() const override;
 	    
     };
 }

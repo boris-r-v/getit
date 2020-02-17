@@ -1,25 +1,5 @@
 #include <config.h>
-#include <iostream>
-
-getit::Manager::Manager( std::string const& _p, std::string const& _m, std::string const& _fn ) : 
-    producer_( _p ),
-    merch_( _m ),
-    file_name_ ( _fn )
-{
-}
-
-std::string const& getit::Manager::producer() const
-{
-    return producer_;
-}
-std::string const& getit::Manager::merch() const
-{
-    return merch_;
-}
-std::string const& getit::Manager::file_name() const
-{
-    return file_name_;
-}
+#include <manager.h>
 
 getit::Config::Config( std::string const& path_to_config  ) 
 {
@@ -44,7 +24,7 @@ void getit::Config::extract_managers_path( xmlpp::DomParser const& vm  )
 {
     const xmlpp::Node* root = vm.get_document()->get_root_node();
     auto node = root->find("/descendant::path").front();
-    customers_path_ = static_cast<xmlpp::Element*>(node)->get_attribute_value("managers");
+    managers_path_ = static_cast<xmlpp::Element*>(node)->get_attribute_value("managers");
 }
 
 void getit::Config::extract_managers( xmlpp::DomParser const& vm  )
@@ -54,11 +34,11 @@ void getit::Config::extract_managers( xmlpp::DomParser const& vm  )
     for ( auto m : nodes )
     {
 	managers_.emplace_back( 
-	    Manager	
+	    std::make_shared<Manager>	
 	    (
 		static_cast<xmlpp::Element*>(m)->get_attribute_value("producer"),
 		static_cast<xmlpp::Element*>(m)->get_attribute_value("merch"),
-		static_cast<xmlpp::Element*>(m)->get_attribute_value("filename")
+		managers_path_+"/"+static_cast<xmlpp::Element*>(m)->get_attribute_value("filename")	//FIX ME - "/" - актуально только для OS POSIX-like
 	    )
 	);
     }
@@ -72,7 +52,7 @@ std::string const& getit::Config::managers_path() const
 {
     return managers_path_;
 }
-getit::managers_t const& getit::Config::managers() const
+getit::managers_list_t getit::Config::managers() const
 {
     return managers_;
 }
