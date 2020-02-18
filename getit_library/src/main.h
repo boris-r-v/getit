@@ -8,6 +8,11 @@
 
 namespace getit
 {
+
+/**
+    @brief Класс запуска программы
+	
+*/
     class Main
     {
 	    boost::asio::io_service service_;

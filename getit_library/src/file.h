@@ -1,4 +1,6 @@
-
+/** \file config.h
+    @brief Файл содержит имплементацию интерфейса файла и директории
+*/
 
 #ifndef GETIT_FILE_H
 #define GETIT_FILE_H
@@ -8,6 +10,9 @@
 
 namespace getit
 {
+    /**
+	@brief Импелементация интерфейса файла
+    */
     class File final: public FileIface
     {
 	    std::string path_;
@@ -21,6 +26,9 @@ namespace getit
 	    std::string path() const;
     };
 
+    /**
+	@brief Импелементация интерфейса каталога
+    */
     class Directory final: public DirectoryIface
     {
 	public:

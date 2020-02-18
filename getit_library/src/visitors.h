@@ -7,9 +7,9 @@ namespace getit
 {
 
     /**
-    * @brief This is an algorithm for collecting goods by name of the manufacturer.
+	@brief Алгоритм сбора заказов к конкретному производителю
     */
-    class OrderForProducer final: public VisitorIface<DatabaseIface>, public Invoker<file_lines_t>
+    class OrderForProducer final: public VisitorIface<DatabaseIface>, public Callback<file_lines_t>
     {
 	    merch_producer_t const producer_;
 	    file_lines_t handle_result( merch_list_t );
@@ -19,9 +19,9 @@ namespace getit
     };
 
     /**
-    * @brief This is an algorithm for collecting goods by product name 
+	@brief Алгоритм сбора заказов по типу товара
     */
-    class OrderForName final: public VisitorIface<DatabaseIface>, public Invoker<file_lines_t>
+    class OrderForName final: public VisitorIface<DatabaseIface>, public Callback<file_lines_t>
     {
 	    merch_name_t const name_;
 	    file_lines_t handle_result( merch_list_t );
@@ -32,7 +32,9 @@ namespace getit
 
 
     /**
-    * @brief This is algo for update database
+	@brief Алгоритм добавления/изменения записей в базе данных
+	
+	Не реализован
     */
     class DataBaseUpdate final: public VisitorIface<DatabaseIface>
     {

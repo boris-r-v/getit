@@ -1,5 +1,5 @@
 /** \file manager.h
-    @brief Описание менеждеров
+    @brief Файл содержит реализацию интерфейсов Менеджера и БассейнаМенеджеров 
 
     @authors Boris Rozhkin borisrozhkin@gmail.com
 
@@ -13,7 +13,9 @@
 namespace getit
 {
     /**
-	@brief Class Manager - Инкапсулирует задачи одного менеджера
+	@brief Реализация интерфейса менеджер
+
+	Хранит список посетителей которые должны выполнить задачу
     */
     class Manager final : public ManagerIface
     {
@@ -28,7 +30,7 @@ namespace getit
 	    void work( DatabaseIface& ) override;
     };
     /**
-	@brief Class ManagerPool - Создает менеджеров и затавляет их работать
+	@brief Реализация интерфейса менеджеров
     */
     class ManagerPool final : public ManagerPoolIface
     {

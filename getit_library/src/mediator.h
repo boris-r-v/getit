@@ -6,7 +6,9 @@
 
 namespace getit
 {
-
+    /**
+	@brief Реализация паттерна Mediator, создает все составные части системы и обеспечивает их взаимосвязь
+    */
     class Mediator
     {
 	    directory_iface_ptr dir_;
@@ -16,7 +18,6 @@ namespace getit
 
 	public:
 	    Mediator( getit::ConfigIface const& vm );
-
 
 	    void do_it();
 

@@ -6,7 +6,7 @@
 namespace getit
 {
     /**
-	@brief Fruit - Merch interface implementation
+	@brief Имплементация интерфейса Товар в виде Фрукта
     */
     class Fruit final: public MerchIface
     {

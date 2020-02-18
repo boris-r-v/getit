@@ -6,7 +6,7 @@
 namespace getit
 {
     /**
-    * @brief DatabaseIface implementations
+	@brief Импелементация интерфейса базы данных
     */
     class Database final: public DatabaseIface
     {

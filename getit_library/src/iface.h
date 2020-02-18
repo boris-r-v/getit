@@ -1,3 +1,9 @@
+/** \file iface.h
+    @brief Набор интерфейсов для реализации слабой связности между классами (SOLID)
+
+    @authors Boris Rozhkin borisrozhkin@gmail.com
+*/
+
 #ifndef GETIT_IFACE_H
 #define GETIT_IFACE_H
 
@@ -15,7 +21,9 @@ namespace getit
     typedef double merch_price_t;
     typedef double merch_weight_t;
     /**
-	@brief Merch interface
+	@brief Интерфейс описания товара
+
+	Содержит методы доступа к 4-м атрибутам товара: цена, масса, имя, производитель
     */
     class MerchIface
     {
@@ -29,20 +37,20 @@ namespace getit
     typedef std::list< merch_iface_ptr > merch_list_t;
     
     /**
-	@brief Remote Invoker
+	@brief Базовый класс для добавления коллбэка, с обощенным типом
     */
     template< typename T >
-    class Invoker
+    class Callback
     {
 	protected:
-	    std::function< void ( T ) > invoke_;
+	    std::function< void ( T ) > call_;
 	public:
-	    Invoker ( std::function< void ( T ) > &f ): invoke_(std::move(f) )
+	    Callback ( std::function< void ( T ) > &f ): call_(std::move(f) )
 	    {
 	    }
     };
     /**
-	@brief DatabaseVisitorIface
+	@brief Шаблонный интерфейс для реализации паттерна Visitor
     */
     template <typename T>
     class VisitorIface
@@ -51,7 +59,9 @@ namespace getit
 	    virtual void visit( T& ) = 0; 	        
     };
     /**
-	@brief Database interface
+	@brief Интерфейс базы данных 
+
+	Содержит методы доступа к данным (get, set) и метод применения Visitor
     */
     class DatabaseIface
     {
@@ -64,15 +74,21 @@ namespace getit
     typedef std::shared_ptr <VisitorIface<DatabaseIface> > visitor_iface_ptr;
     typedef std::list <visitor_iface_ptr> visitor_list_t;
     /**
-	@brief Income File state
+	@brief Статусы состояния файла 
     */
-    enum class FileState {modified, not_modified};
+    enum class FileState 
+    {
+	modified, 	/**< файл был модифицирован */
+	not_modified	/**< файл не был модифицирован	*/
+    };
     /**
-	@brief Sting with file line
+	@brief Тип данных: список строк
     */
     typedef std::list<std::string> file_lines_t;
     /**
-	@brief Common File interface
+	@brief Интерфейс файла.
+
+	Позволяет получить/записать список строк из/в файла и проверить, что за последнее время он изменился
     */
     class FileIface
     {
@@ -87,7 +103,9 @@ namespace getit
     typedef std::list<file_iface_ptr> file_list_t;
 
     /**
-	@brief Directory interface
+	@brief Интерфейс директории.
+
+	Содержит метод получения списка  файлов
     */
     class DirectoryIface
     {
@@ -97,12 +115,9 @@ namespace getit
     typedef std::shared_ptr< DirectoryIface > directory_iface_ptr;
 
     /**
-	@brief LogicIface Mediator pattern with curretn handle data logic
-    */
-	//FIX ME Mediator has no iface yet
+	@brief Интерфейс менеджера.
 
-    /**
-	@brief Manager iface
+	Содержит методы доступа к задачам конктретного менеджера: наименование товара и его производителя согласно задачи менеджера
     */
     class ManagerIface
     {
@@ -116,7 +131,7 @@ namespace getit
     typedef std::list<manager_iface_ptr> managers_list_t;
 
     /**
-	@brief Manager iface
+	@brief Интерфейс места работы менеджеров, содержит их список и заставляет работать.
     */
     class ManagerPoolIface
     {
@@ -126,7 +141,7 @@ namespace getit
     typedef std::shared_ptr<ManagerPoolIface> manager_pool_iface_ptr;
 
     /**
-	@brief Config iface
+	@brief Интерфейс конфигуратора, обеспечивает доступ к данным в конфигурационном файле
     */
     class ConfigIface
     {    

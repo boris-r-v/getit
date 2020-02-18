@@ -1,9 +1,5 @@
 #ifndef GETIT_PROVIDER_H
 #define GETIT_PROVIDER_H
-/**
-    @brief Class Provider - создает требуемые структуры данных для решения целевой задачи: компоновки заказов 
-	
-*/
 #include <config.h>
 #include <mediator.h>
 #include <boost/asio.hpp>
@@ -11,6 +7,10 @@
 
 namespace getit
 {
+    /**
+	@brief Провайдер обеспечивает периодичность проверки набора файлов с задачами менеджеров
+	
+    */
     class Provider
     {
     	    boost::asio::deadline_timer timer_;

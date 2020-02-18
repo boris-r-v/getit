@@ -1,8 +1,5 @@
 /** \file config.h
-    @brief Описание классов конфигурации ПО
-
-    @authors Boris Rozhkin borisrozhkin@gmail.com
-
+    @brief Файл содержит имплементацию интерфейса чтения конфигурации
 */
 
 #ifndef GETIT_CONFIG_H
@@ -13,10 +10,11 @@
 namespace getit
 {
     /**
-	@brief Class Config - обрабатывает конфигурацию задачи
+	@brief Config - обрабатывает конфигурацию задачи
 
 	Парсит конфигурауционный файл с описанием решаемой задачи    
-		
+	
+	Обеспечивает интерфейс доступа конфигурации каталогов с файлами и перечню менеджеров
     */
     class Config final : public ConfigIface 
     {
